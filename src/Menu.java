@@ -22,18 +22,24 @@ public class Menu {
                         boolean ficar = true;
                         do {
                             System.out.println("Escolha o que quer fazer:");
-                            System.out.println("1 - Opção 1");
-                            System.out.println("2 - Opção 2");
-                            System.out.println("2 - Opção 3"); //e assim por diante
+                            System.out.println("1 - Inserir produto");
+                            System.out.println("2 - Exibir produtos");
+                            System.out.println("3 - Editar dados de um produto");
+                            System.out.println("4 - Excluir produto");
+                            System.out.println("5 - Sair"); //e assim por diante
                             read = new Scanner(System.in);
                             int opcao = read.nextInt();
                             switch (opcao)
                             {
-                                case 1:
+                                case 1: //criação de produto
                                     break;
-                                case 2:
+                                case 2: //consulta de produtos
                                     break;
-                                case 3:
+                                case 3: //edição
+                                    break;
+                                case 4: //exclusão
+                                    break;
+                                case 5: //sair do programa
                                     ficar = false;
                                     break;
                                 default:
