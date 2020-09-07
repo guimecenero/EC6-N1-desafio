@@ -1,3 +1,5 @@
+package Enums;
+
 public enum CoresRoupa {
     AZUL(1),
     VERMELHO(2),

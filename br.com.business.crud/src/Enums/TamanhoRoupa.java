@@ -1,3 +1,5 @@
+package Enums;
+
 public enum TamanhoRoupa {
     P(1),
     M(2),
