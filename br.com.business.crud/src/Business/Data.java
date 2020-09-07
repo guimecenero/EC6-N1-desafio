@@ -1,5 +1,8 @@
 package Business;
 import java.io.*;
+import java.time.LocalDate;
+
+import Enums.*;
 import VO.RoupaVO;
 
 public class Data {
@@ -122,5 +125,24 @@ public class Data {
         }
         bw.close();
         fw.close();
+    }
+
+    public RoupaVO MontaRoupa(int id) throws Exception {
+        String[] roupaInfo = GetLine(id);
+        RoupaVO r = new RoupaVO();
+        r.setId(Integer.parseInt(roupaInfo[0]));
+        r.setDataEntrada(LocalDate.parse(roupaInfo[1]));
+        r.setLocalCompra(roupaInfo[2]);
+        r.setTipo(roupaInfo[3]);
+        r.setMarca(roupaInfo[4]);
+        r.setDescricaoPeca(roupaInfo[5]);
+        r.setTamanho(TamanhoRoupa.valueOf((roupaInfo[6])));
+        r.setCor(CoresRoupa.valueOf((roupaInfo[7])));
+        r.setValorEtiqueta(Double.parseDouble(roupaInfo[8]));
+        r.setValorPago(Double.parseDouble(roupaInfo[9]));
+        //linha 10 não tem SET (automático)
+        r.setPrecoSugerido(Double.parseDouble(roupaInfo[11]));
+
+        return r;
     }
 }
