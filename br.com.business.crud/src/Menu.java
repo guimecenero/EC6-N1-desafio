@@ -1,3 +1,9 @@
+import VO.RoupaVO;
+
+import Business.Data;
+
+import java.io.IOException;
+import java.time.LocalDate;
 import java.util.*;
 
 public class Menu {
@@ -31,7 +37,8 @@ public class Menu {
                             int opcao = read.nextInt();
                             switch (opcao)
                             {
-                                case 1: //criação de produto
+                                case 1:
+                                    InserirRoupa();
                                     break;
                                 case 2: //consulta de produtos
                                     break;
@@ -59,5 +66,21 @@ public class Menu {
             }
         }
         while(ficarPrograma);
+    }
+
+    public static void InserirRoupa()
+    {
+        try {
+            Data data = new Data();
+            RoupaVO roupa = new RoupaVO();
+            roupa.setId(data.nextID());
+            System.out.println("Insira a Data de entrada: (DD/MM/AAAA)");
+            Scanner read = new Scanner(System.in);
+            roupa.setDataEntrada(LocalDate.parse(read.nextLine()));
+        }
+        catch (IOException e)
+        {
+            System.out.println(e);
+        }
     }
 }
