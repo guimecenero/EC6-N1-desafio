@@ -13,7 +13,6 @@ public class RoupaVO {
     private CoresRoupa cor;
     private double valorEtiqueta;
     private double ValorPago;
-    private double valorMargem100porcento;
     private double precoSugerido;
 
     public int getId() {
@@ -96,11 +95,7 @@ public class RoupaVO {
     }
 
     public double getValorMargem100porcento() {
-        return valorMargem100porcento;
-    }
-
-    public void setValorMargem100porcento(double valorMargem100porcento) {
-        this.valorMargem100porcento = getValorPago() * 2; //não tenho certeza de que isso está certo
+        return getValorPago() * 2;
     }
 
     public double getPrecoSugerido() {
