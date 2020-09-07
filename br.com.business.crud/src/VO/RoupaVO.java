@@ -1,3 +1,5 @@
+package VO;
+import Enums.*;
 import java.time.LocalDate;
 
 public class RoupaVO {
