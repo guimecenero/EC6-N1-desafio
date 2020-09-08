@@ -134,7 +134,7 @@ public class Menu {
             read = new Scanner(System.in);
             roupa.setPrecoSugerido(Double.parseDouble(read.nextLine()));
 
-            listarRoupa(roupa);
+            exibirDadosRoupa(roupa);
             System.out.println("Confirmar os campos acima?");
             System.out.println("1 - Confirmar");
             System.out.println("2 - Corrigir");
@@ -170,7 +170,7 @@ public class Menu {
         }
     }
 
-    public static void listarRoupa(RoupaVO roupa)
+    public static void exibirDadosRoupa(RoupaVO roupa)
     {
         System.out.println("Data de entrega: " + roupa.getDataEntrada());
         System.out.println("Local de compra: " + roupa.getLocalCompra());
@@ -185,9 +185,9 @@ public class Menu {
         System.out.println("Preço sugerido: R$" + roupa.getPrecoSugerido());
     }
 
-    public static void listarRoupa(int id) throws Exception {
+    public static void exibirDadosRoupa(int id) throws Exception {
         Data info = new Data();
         RoupaVO roupa = info.MontaRoupa(id);
-        listarRoupa(roupa);
+        exibirDadosRoupa(roupa);
     }
 }
