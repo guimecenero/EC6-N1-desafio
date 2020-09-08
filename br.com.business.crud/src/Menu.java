@@ -41,7 +41,7 @@ public class Menu {
                             int opcao = read.nextInt();
                             switch (opcao)
                             {
-                                case 1:
+                                case 1: //Inserir roupa
                                     InserirRoupa();
                                     break;
                                 case 2: //consulta de produtos
@@ -74,77 +74,110 @@ public class Menu {
 
     public static void InserirRoupa()
     {
-        boolean valido;
-        do {
-            try {
-                Data data = new Data();
-                RoupaVO roupa = new RoupaVO();
-                roupa.setId(data.nextID());
+        RoupaVO roupa = new RoupaVO();
+        Data data = new Data();
+        boolean valido = false;
+        try {
+            roupa.setId(data.nextID());
+            Scanner read;
+            do {
                 System.out.println("Insira a Data de entrada: (DD/MM/AAAA)");
-                Scanner read = new Scanner(System.in);
+                read = new Scanner(System.in);
                 String dataDMY = read.nextLine();
-                valido = validarData(dataDMY);
-                if (valido) {
+                if (validarData(dataDMY)) {
                     roupa.setDataEntrada(read.nextLine());
+                    valido = true;
                 }
                 else {
                     System.out.println("Data Inválida!");
                 }
-                System.out.println("Digite o Local de compra: ");
-                read = new Scanner(System.in);
-                roupa.setLocalCompra(read.nextLine());
-                System.out.println("Digite o tipo de roupa: ");
-                read = new Scanner(System.in);
-                roupa.setTipo(read.nextLine());
-                System.out.println("Digite a marca da roupa: ");
-                read = new Scanner(System.in);
-                roupa.setMarca(read.nextLine());
-                System.out.println("Faça a descrição da peça: ");
-                read = new Scanner(System.in);
-                roupa.setDescricaoPeca(read.nextLine());
-                TamanhoRoupa[] tamanhos = TamanhoRoupa.values();
-                System.out.println("Escolha o tamanho da peça: \n P \n M \n G \n GG");
-                read = new Scanner(System.in);
-                String escrito = read.nextLine().toUpperCase();
-                for (TamanhoRoupa tamanho : tamanhos) {
-                    if (escrito.equals(tamanho.toString())) {
-                        roupa.setTamanho(tamanho);
-                    }
-                }
-                CoresRoupa[] cores = CoresRoupa.values();
-                System.out.println("Escolha a cor da peça: \n Azul \n Vermelho " +
-                                   "\n Amarelo \n Verde \n Roxo \n Preto \n Branco");
-                read = new Scanner(System.in);
-                escrito = read.nextLine().toUpperCase();
-                for (CoresRoupa cor : cores) {
-                    if (escrito.equals(cor.toString())) {
-                        roupa.setCor(cor);
-                    }
-                }
-                System.out.println("Digite o valor de etiqueta: ");
-                read = new Scanner(System.in);
-                roupa.setValorEtiqueta(Double.parseDouble(read.nextLine()));
-                System.out.println("Digite o valor pago: ");
-                read = new Scanner(System.in);
-                roupa.setValorPago(Double.parseDouble(read.nextLine()));
-                System.out.println("Qual o preço sugerido?");
-                read = new Scanner(System.in);
-                roupa.setPrecoSugerido(Double.parseDouble(read.nextLine()));
             }
-            catch (IOException e) {
-                System.out.println(e);
+            while(!valido);
+            System.out.println("Digite o Local de compra: ");
+            read = new Scanner(System.in);
+            roupa.setLocalCompra(read.nextLine());
+            System.out.println("Digite o tipo de roupa: ");
+            read = new Scanner(System.in);
+            roupa.setTipo(read.nextLine());
+            System.out.println("Digite a marca da roupa: ");
+            read = new Scanner(System.in);
+            roupa.setMarca(read.nextLine());
+            System.out.println("Faça a descrição da peça: ");
+            read = new Scanner(System.in);
+            roupa.setDescricaoPeca(read.nextLine());
+            TamanhoRoupa[] tamanhos = TamanhoRoupa.values();
+            System.out.println("Escolha o tamanho da peça: \n P \n M \n G \n GG");
+            read = new Scanner(System.in);
+            String escrito = read.nextLine().toUpperCase();
+            for (TamanhoRoupa tamanho : tamanhos) {
+                if (escrito.equals(tamanho.toString())) {
+                    roupa.setTamanho(tamanho);
+                }
             }
-        }while (true);
+            CoresRoupa[] cores = CoresRoupa.values();
+            System.out.println("Escolha a cor da peça: \n Azul \n Vermelho " +
+                               "\n Amarelo \n Verde \n Roxo \n Preto \n Branco");
+            read = new Scanner(System.in);
+            escrito = read.nextLine().toUpperCase();
+            for (CoresRoupa cor : cores) {
+                if (escrito.equals(cor.toString())) {
+                    roupa.setCor(cor);
+                }
+            }
+            System.out.println("Digite o valor de etiqueta: ");
+            read = new Scanner(System.in);
+            roupa.setValorEtiqueta(Double.parseDouble(read.nextLine()));
+            System.out.println("Digite o valor pago: ");
+            read = new Scanner(System.in);
+            roupa.setValorPago(Double.parseDouble(read.nextLine()));
+            System.out.println("Qual o preço sugerido?");
+            read = new Scanner(System.in);
+            roupa.setPrecoSugerido(Double.parseDouble(read.nextLine()));
+
+            listarRoupa(roupa);
+            System.out.println("Confirmar os campos acima?");
+            System.out.println("1 - Confirmar");
+            System.out.println("2 - Corrigir");
+            System.out.println("3 - Cancelar");
+            read = new Scanner(System.in);
+            int opcao = read.nextInt();
+            switch (opcao)
+            {
+                case 1:
+                    data.NewLine(roupa);
+                    break;
+                case 2:
+                    //jogar no editar
+                    break;
+                case 3:
+                    //voltar para o menu
+                    break;
+            }
+        }
+        catch (IOException e) {
+            System.out.println(e);
+        }
     }
 
     public static boolean validarData(String dataDigitada) {
         DateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         try {
             Date data = formato.parse(dataDigitada);
+            return true;
         }
         catch (ParseException erro) {
             return false;
         }
-        return true;
+    }
+
+    public static void listarRoupa(RoupaVO roupa)
+    {
+        System.out.print("Data de entrega: " + "variavel");
+    }
+
+    public static void listarRoupa(int id) throws Exception {
+        Data info = new Data();
+        RoupaVO roupa = info.MontaRoupa(id);
+        listarRoupa(roupa);
     }
 }
