@@ -131,7 +131,7 @@ public class Data {
         String[] roupaInfo = GetLine(id);
         RoupaVO r = new RoupaVO();
         r.setId(Integer.parseInt(roupaInfo[0]));
-        r.setDataEntrada(LocalDate.parse(roupaInfo[1]));
+        r.setDataEntrada(roupaInfo[1]);
         r.setLocalCompra(roupaInfo[2]);
         r.setTipo(roupaInfo[3]);
         r.setMarca(roupaInfo[4]);

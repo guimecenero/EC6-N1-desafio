@@ -1,10 +1,9 @@
 package VO;
 import Enums.*;
-import java.time.LocalDate;
 
 public class RoupaVO {
     private int id;
-    private LocalDate dataEntrada;
+    private String dataEntrada;
     private String localCompra;
     private String tipo;
     private String marca;
@@ -23,17 +22,16 @@ public class RoupaVO {
         this.id = id;
     }
 
-    public LocalDate getDataEntrada() {
-        return dataEntrada;
-    }
+    public String getDataEntrada() { return dataEntrada; }
 
-    public void setDataEntrada(LocalDate dataEntrada) {
+    public void setDataEntrada(String dataEntrada) {
         this.dataEntrada = dataEntrada;
     }
 
     public String getLocalCompra() {
         return localCompra;
     }
+
     public void setLocalCompra(String localCompra) {
         this.localCompra = localCompra;
     }
