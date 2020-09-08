@@ -172,7 +172,17 @@ public class Menu {
 
     public static void listarRoupa(RoupaVO roupa)
     {
-        System.out.print("Data de entrega: " + "variavel");
+        System.out.println("Data de entrega: " + roupa.getDataEntrada());
+        System.out.println("Local de compra: " + roupa.getLocalCompra());
+        System.out.println("Tipo: " + roupa.getTipo());
+        System.out.println("Marca: " + roupa.getMarca());
+        System.out.println("Descrição da peça: " + roupa.getDescricaoPeca());
+        System.out.println("Tamanho: " + roupa.getTamanho());
+        System.out.println("Cor da peça: " + roupa.getCor());
+        System.out.println("Valor de etiqueta: R$" + roupa.getValorEtiqueta());
+        System.out.println("Valor pago: R$" + roupa.getValorPago());
+        System.out.println("Valor margem 100%: R$" + roupa.getValorMargem100porcento());
+        System.out.println("Preço sugerido: R$" + roupa.getPrecoSugerido());
     }
 
     public static void listarRoupa(int id) throws Exception {

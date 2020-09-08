@@ -24,7 +24,7 @@ public class RoupaVO {
 
     public String getDataEntrada() { return dataEntrada; }
 
-    public void setDataEntrada(String dataEntrada) {
+        public void setDataEntrada(String dataEntrada) {
         this.dataEntrada = dataEntrada;
     }
 
