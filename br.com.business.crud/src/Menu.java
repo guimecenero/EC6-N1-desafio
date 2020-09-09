@@ -28,7 +28,7 @@ public class Menu {
                     System.out.print("Digite a senha: ");
                     read = new Scanner(System.in);
                     String senha = read.nextLine();
-                    System.out.println(nome + " - " + senha);
+                    //System.out.println(nome + " - " + senha); //linha de debug
                     if (nome.equals("guilherme") && senha.equals("123")) {
                         boolean ficar = true;
                         do {
@@ -70,7 +70,10 @@ public class Menu {
                                         System.out.println("Opção invalida, tente de novo");
                                         break;
                                 }
-                            } catch (IOException e) {
+
+                            }
+                            catch (Exception e)
+                            {
                                 System.out.println(e);
                             }
                         }
@@ -102,7 +105,7 @@ public class Menu {
                 read = new Scanner(System.in);
                 String dataDMY = read.nextLine();
                 if (validarData(dataDMY)) {
-                    roupa.setDataEntrada(read.nextLine());
+                    roupa.setDataEntrada(dataDMY);
                     valido = true;
                 } else {
                     System.out.println("Data Inválida!");
@@ -394,10 +397,19 @@ public class Menu {
 
         Data info = new Data();
         try {
-            System.out.println("Código - Data de entrada - Local da compra - Tipo - Marca - Características - idTamanho - idCor - Valor da etiqueta - Valor pago - Valor margem de 100% - Preço sugerido");
             String[] linhas = info.GetAll();
+            if (linhas.length-1 <= 0)
+            {
+                System.out.println("********** Database vazia, adiciona elementos antes! **********");
+                return;
+            }
+            System.out.println("Código - Data de entrada - Local da compra - Tipo - Marca - Características - idTamanho - idCor - Valor da etiqueta - Valor pago - Valor margem de 100% - Preço sugerido");
             for (String linha : linhas) {
                 String[] aux = linha.split(";");
+                if (aux[0].equals("."))
+                {
+                    break;
+                }
                 System.out.println(aux[0] + " - " +
                         aux[1] + " - " +
                         aux[2] + " - " +
@@ -430,7 +442,7 @@ public class Menu {
         System.out.println("Preço sugerido: R$" + roupa.getPrecoSugerido());
     }
 
-    public static void exibirDadosRoupa(int id) throws Exception {
+    public static void exibirDadosRoupa(int id) throws Exception{
         Data info = new Data();
         RoupaVO roupa = info.MontaRoupa(id);
         exibirDadosRoupa(roupa);
