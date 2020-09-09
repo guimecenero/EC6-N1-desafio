@@ -47,6 +47,7 @@ public class Data {
 
     public int nextID() throws IOException {
         String[] linhas = GetAll();
+        if (linhas.length-1 <= 0) return 1;
         int lastID = Integer.parseInt(linhas[linhas.length - 1].split(";")[0]);
         return lastID + 1;
     }
