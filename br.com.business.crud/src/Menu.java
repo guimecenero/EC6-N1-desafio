@@ -31,32 +31,46 @@ public class Menu {
                     if (nome.equals("guilherme") && senha.equals("123")) {
                         boolean ficar = true;
                         do {
-                            System.out.println("Escolha o que quer fazer:");
-                            System.out.println("1 - Inserir produto");
-                            System.out.println("2 - Exibir produtos");
-                            System.out.println("3 - Editar dados de um produto");
-                            System.out.println("4 - Excluir produto");
-                            System.out.println("5 - Sair");
-                            read = new Scanner(System.in);
-                            int opcao = read.nextInt();
-                            switch (opcao)
-                            {
-                                case 1: //Inserir roupa
-                                    InserirRoupa();
-                                    break;
-                                case 2: //consulta de produtos
-                                    listarRoupas();
-                                    break;
-                                case 3: //edição
-                                    break;
-                                case 4: //exclusão
-                                    break;
-                                case 5: //sair do programa
-                                    ficar = false;
-                                    break;
-                                default:
-                                    System.out.println("Opção invalida, tente denovo");
-                                    break;
+                            try {
+                                System.out.println("Escolha o que quer fazer:");
+                                System.out.println("1 - Inserir produto");
+                                System.out.println("2 - Exibir produtos");
+                                System.out.println("3 - Editar dados de um produto");
+                                System.out.println("4 - Excluir produto");
+                                System.out.println("5 - Sair");
+                                read = new Scanner(System.in);
+                                int opcao = read.nextInt();
+                                switch (opcao) {
+                                    case 1: //Inserir roupa
+                                        InserirRoupa();
+                                        break;
+                                    case 2: //consulta de produtos
+                                        listarRoupas();
+                                        break;
+                                    case 3: //edição
+                                        System.out.print("Digite o id da roupa para ser editada (0 para cancelar): ");
+                                        read = new Scanner(System.in);
+                                        int cod = read.nextInt();
+                                        if (cod != 0)
+                                            editarRoupa(cod);
+                                        break;
+                                    case 4: //exclusão
+                                        System.out.println("Digite o id da roupa para ser EXCLUÍDA (0 para cancelar): ");
+                                        read = new Scanner(System.in);
+                                        int id = read.nextInt();
+                                        Data info = new Data();
+                                        if (id != 0)
+                                            info.DeleteLine(id);
+                                        break;
+                                    case 5: //sair do programa
+                                        ficar = false;
+                                        break;
+                                    default:
+                                        System.out.println("Opção invalida, tente de novo");
+                                        break;
+                                }
+                            } catch (IOException e) {
+                                System.out.println(e);
                             }
                         }
                         while (ficar);
@@ -73,8 +87,7 @@ public class Menu {
         while (ficarPrograma);
     }
 
-    public static void InserirRoupa()
-    {
+    public static void InserirRoupa() {
         RoupaVO roupa = new RoupaVO();
         Data data = new Data();
         boolean valido = false;
@@ -88,8 +101,7 @@ public class Menu {
                 if (validarData(dataDMY)) {
                     roupa.setDataEntrada(read.nextLine());
                     valido = true;
-                }
-                else {
+                } else {
                     System.out.println("Data Inválida!");
                 }
             }
@@ -117,7 +129,7 @@ public class Menu {
             }
             CoresRoupa[] cores = CoresRoupa.values();
             System.out.println("Escolha a cor da peça: \n Azul \n Vermelho " +
-                               "\n Amarelo \n Verde \n Roxo \n Preto \n Branco");
+                    "\n Amarelo \n Verde \n Roxo \n Preto \n Branco");
             read = new Scanner(System.in);
             escrito = read.nextLine().toUpperCase();
             for (CoresRoupa cor : cores) {
@@ -142,8 +154,7 @@ public class Menu {
             System.out.println("3 - Cancelar");
             read = new Scanner(System.in);
             int opcao = read.nextInt();
-            switch (opcao)
-            {
+            switch (opcao) {
                 case 1:
                     data.NewLine(roupa);
                     break;
@@ -154,8 +165,7 @@ public class Menu {
                     //voltar para o menu
                     break;
             }
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             System.out.println(e);
         }
     }
@@ -165,8 +175,7 @@ public class Menu {
         try {
             Date data = formato.parse(dataDigitada);
             return true;
-        }
-        catch (ParseException erro) {
+        } catch (ParseException erro) {
             return false;
         }
     }
@@ -284,53 +293,48 @@ public class Menu {
                         ficar = false;
                         break;
                 }
-            }
-            catch(IOException e)
-                {
-                    System.out.println(e);
-                }
-            } while (ficar) ;
-        }
-
-        public static void editarRoupa ( int id)
-        {
-            Data info = new Data();
-            try {
-                editarRoupa(info.MontaRoupa(id), false);
-            } catch (Exception e) {
-                System.out.println(e);
-            }
-        }
-
-        public static void listarRoupas ()
-        {
-
-            Data info = new Data();
-            try {
-                System.out.println("Código - Data de entrada - Local da compra - Tipo - Marca - Características - idTamanho - idCor - Valor da etiqueta - Valor pago - Valor margem de 100% - Preço sugerido");
-                String[] linhas = info.GetAll();
-                for (String linha : linhas) {
-                    String[] aux = linha.split(";");
-                    System.out.println(aux[0] + " - " +
-                            aux[1] + " - " +
-                            aux[2] + " - " +
-                            aux[3] + " - " +
-                            aux[4] + " - " +
-                            aux[5] + " - " +
-                            aux[6] + " - " +
-                            aux[7] + " - " +
-                            aux[8] + " - " +
-                            aux[9] + " - " +
-                            aux[10] + " - " +
-                            aux[11]);
-                }
             } catch (IOException e) {
                 System.out.println(e);
             }
-        }
+        } while (ficar);
+    }
 
-    public static void exibirDadosRoupa(RoupaVO roupa)
-    {
+    public static void editarRoupa(int id) {
+        Data info = new Data();
+        try {
+            editarRoupa(info.MontaRoupa(id), false);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public static void listarRoupas() {
+
+        Data info = new Data();
+        try {
+            System.out.println("Código - Data de entrada - Local da compra - Tipo - Marca - Características - idTamanho - idCor - Valor da etiqueta - Valor pago - Valor margem de 100% - Preço sugerido");
+            String[] linhas = info.GetAll();
+            for (String linha : linhas) {
+                String[] aux = linha.split(";");
+                System.out.println(aux[0] + " - " +
+                        aux[1] + " - " +
+                        aux[2] + " - " +
+                        aux[3] + " - " +
+                        aux[4] + " - " +
+                        aux[5] + " - " +
+                        aux[6] + " - " +
+                        aux[7] + " - " +
+                        aux[8] + " - " +
+                        aux[9] + " - " +
+                        aux[10] + " - " +
+                        aux[11]);
+            }
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    }
+
+    public static void exibirDadosRoupa(RoupaVO roupa) {
         System.out.println("Data de entrega: " + roupa.getDataEntrada());
         System.out.println("Local de compra: " + roupa.getLocalCompra());
         System.out.println("Tipo: " + roupa.getTipo());
