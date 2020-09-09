@@ -7,7 +7,7 @@ import VO.RoupaVO;
 
 public class Data {
 
-    File arquivo = new File("/Tabela.txt");
+    File arquivo = new File("Tabela.txt");
 
     private boolean CheckFile() throws IOException {
         return  arquivo.createNewFile();
@@ -22,11 +22,17 @@ public class Data {
             String linha = br.readLine();
             String[] retorno = linha.split(";");
             int codigo = Integer.parseInt(retorno[0]);
-            br.close();
-            fr.close();
-            if (codigo == id) return retorno;
+            if (codigo == id)
+            {
+                br.close();
+                fr.close();
+                return retorno;
+            }
         }
-        throw new Exception("Id não encontrado");
+        br.close();
+        fr.close();
+        System.out.println("Id não encontrado");
+        throw new Exception();
     }
 
     public String[] GetAll() throws IOException {
@@ -40,6 +46,7 @@ public class Data {
             linha = linha + "#";
             aux = aux + linha;
         }
+        aux = aux + ".";
         br.close();
         fr.close();
         return aux.split("#");
@@ -48,7 +55,7 @@ public class Data {
     public int nextID() throws IOException {
         String[] linhas = GetAll();
         if (linhas.length-1 <= 0) return 1;
-        int lastID = Integer.parseInt(linhas[linhas.length - 1].split(";")[0]);
+        int lastID = Integer.parseInt(linhas[linhas.length - 2].split(";")[0]);
         return lastID + 1;
     }
 
@@ -75,7 +82,7 @@ public class Data {
     public void EditLine(RoupaVO roupa) throws IOException {
         boolean mudou = false;
         String[] linha = GetAll();
-        for (int i = 0; i < linha.length; i++)
+        for (int i = 0; i < linha.length-1; i++)
         {
             String[] aux = linha[i].split(";");
             if (Integer.parseInt(aux[0]) == roupa.getId())
@@ -102,9 +109,9 @@ public class Data {
     public void DeleteLine(int id) throws IOException {
         boolean mudou = false;
         String[] linha = GetAll();
-        String[] newLinha = new String[linha.length-1];
+        String[] newLinha = new String[linha.length-2];
         int pos = 0;
-        for (int i = 0; i < linha.length; i++)
+        for (int i = 0; i < linha.length -1; i++)
         {
             String[] aux = linha[i].split(";");
             if (Integer.parseInt(aux[0]) != id)
@@ -121,6 +128,7 @@ public class Data {
         FileWriter fw = new FileWriter(arquivo,false);
         BufferedWriter bw = new BufferedWriter(fw);
         for (String linha: linhas) {
+            if(linha.split(";")[0].equals(".")) break;
             bw.write(linha);
             bw.newLine();
         }
