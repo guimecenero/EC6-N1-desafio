@@ -36,7 +36,7 @@ public class Menu {
                             System.out.println("2 - Exibir produtos");
                             System.out.println("3 - Editar dados de um produto");
                             System.out.println("4 - Excluir produto");
-                            System.out.println("5 - Sair"); //e assim por diante
+                            System.out.println("5 - Sair");
                             read = new Scanner(System.in);
                             int opcao = read.nextInt();
                             switch (opcao)
@@ -45,6 +45,7 @@ public class Menu {
                                     InserirRoupa();
                                     break;
                                 case 2: //consulta de produtos
+                                    listarRoupas();
                                     break;
                                 case 3: //edição
                                     break;
@@ -69,7 +70,7 @@ public class Menu {
                     break;
             }
         }
-        while(ficarPrograma);
+        while (ficarPrograma);
     }
 
     public static void InserirRoupa()
@@ -92,7 +93,7 @@ public class Menu {
                     System.out.println("Data Inválida!");
                 }
             }
-            while(!valido);
+            while (!valido);
             System.out.println("Digite o Local de compra: ");
             read = new Scanner(System.in);
             roupa.setLocalCompra(read.nextLine());
@@ -147,7 +148,7 @@ public class Menu {
                     data.NewLine(roupa);
                     break;
                 case 2:
-                    //jogar no editar
+                    editarRoupa(roupa, true);
                     break;
                 case 3:
                     //voltar para o menu
@@ -169,6 +170,106 @@ public class Menu {
             return false;
         }
     }
+
+    public static void editarRoupa(RoupaVO roupa, boolean inserido) {
+        Data info = new Data();
+        boolean ficar = true;
+        do {
+            try {
+                System.out.println("Selecione a linha que deseja alterar:");
+                System.out.println("1 (Data de entrega) - " + roupa.getDataEntrada());
+                System.out.println("2 (Local da compra) - " + roupa.getLocalCompra());
+                System.out.println("3 (Tipo) - " + roupa.getTipo());
+                System.out.println("4 (Marca) - " + roupa.getMarca());
+                System.out.println("5 (Características) - " + roupa.getDescricaoPeca());
+                System.out.println("6 (Tamanho) - " + roupa.getTamanho());
+                System.out.println("7 (Cor) - " + roupa.getCor());
+                System.out.println("8 (Valor de etiqueta) - " + roupa.getValorEtiqueta());
+                System.out.println("9 (Valor pago) - " + roupa.getValorPago());
+                System.out.println("10 (Preço sugerido) - " + roupa.getPrecoSugerido());
+                if (inserido) {
+                    System.out.println("11 Inserir roupa");
+                } else System.out.println("11 Confirmar edição");
+                System.out.println("12 Cancelar");
+                Scanner read = new Scanner(System.in);
+                int opcao = read.nextInt();
+                switch (opcao) {
+                    case 1: //data de entrega
+                        break;
+                    case 2: //local da compra
+                        break;
+                    case 3: //Tipo
+                        break;
+                    case 4: //Marca
+                        break;
+                    case 5: //Característica
+                        break;
+                    case 6: //Tamanho
+                        break;
+                    case 7: //Cor
+                        break;
+                    case 8: //Valor da etiqueta
+                        break;
+                    case 9: //Valor pago
+                        break;
+                    case 10: //Preço sugerido
+                        break;
+                    case 11: //Confirmar
+                        if (inserido) {
+                            info.NewLine(roupa);
+                        } else {
+                            info.EditLine(roupa);
+                        }
+                        ficar = false;
+                        break;
+                    case 12: //Cancelar
+                        ficar = false;
+                        break;
+                }
+            }
+            catch(IOException e)
+                {
+                    System.out.println(e);
+                }
+            } while (ficar) ;
+        }
+
+        public static void editarRoupa ( int id)
+        {
+            Data info = new Data();
+            try {
+                editarRoupa(info.MontaRoupa(id), false);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+
+        public static void listarRoupas ()
+        {
+
+            Data info = new Data();
+            try {
+                System.out.println("Código - Data de entrada - Local da compra - Tipo - Marca - Características - idTamanho - idCor - Valor da etiqueta - Valor pago - Valor margem de 100% - Preço sugerido");
+                String[] linhas = info.GetAll();
+                for (String linha : linhas) {
+                    String[] aux = linha.split(";");
+                    System.out.println(aux[0] + " - " +
+                            aux[1] + " - " +
+                            aux[2] + " - " +
+                            aux[3] + " - " +
+                            aux[4] + " - " +
+                            aux[5] + " - " +
+                            aux[6] + " - " +
+                            aux[7] + " - " +
+                            aux[8] + " - " +
+                            aux[9] + " - " +
+                            aux[10] + " - " +
+                            aux[11]);
+                }
+            } catch (IOException e) {
+                System.out.println(e);
+            }
+        }
 
     public static void exibirDadosRoupa(RoupaVO roupa)
     {
