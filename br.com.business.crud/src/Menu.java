@@ -174,6 +174,7 @@ public class Menu {
     public static void editarRoupa(RoupaVO roupa, boolean inserido) {
         Data info = new Data();
         boolean ficar = true;
+        String escrito;
         do {
             try {
                 System.out.println("Selecione a linha que deseja alterar:");
@@ -194,25 +195,82 @@ public class Menu {
                 Scanner read = new Scanner(System.in);
                 int opcao = read.nextInt();
                 switch (opcao) {
-                    case 1: //data de entrega
+                    case 1://data de entrega
+                        System.out.println("Insira a Data de entrada: (DD/MM/AAAA)");
+                        read = new Scanner(System.in);
+                        String dataDMY = read.nextLine();
+                        if (validarData(dataDMY)) {
+                            roupa.setDataEntrada(read.nextLine());
+                            System.out.println("Data alterada para " + roupa.getDataEntrada());
+                        }
+                        else {
+                            System.out.println("Data Inválida!");
+                        }
                         break;
                     case 2: //local da compra
+                        System.out.println("Digite o Local de compra: ");
+                        read = new Scanner(System.in);
+                        roupa.setLocalCompra(read.nextLine());
+                        System.out.println("Local de compra alterado para " + roupa.getLocalCompra());
                         break;
                     case 3: //Tipo
+                        System.out.println("Digite o tipo de roupa: ");
+                        read = new Scanner(System.in);
+                        roupa.setTipo(read.nextLine());
+                        System.out.println("Tipo alterado para " + roupa.getTipo());
                         break;
                     case 4: //Marca
+                        System.out.println("Digite a marca de roupa: ");
+                        read = new Scanner(System.in);
+                        roupa.setMarca(read.nextLine());
+                        System.out.println("Marca alterada para " + roupa.getMarca());
                         break;
                     case 5: //Característica
+                        System.out.println("Faça a descrição da peça: ");
+                        read = new Scanner(System.in);
+                        roupa.setDescricaoPeca(read.nextLine());
+                        System.out.println("Descrição alterada para " + roupa.getDescricaoPeca());
                         break;
                     case 6: //Tamanho
+                        TamanhoRoupa[] tamanhos = TamanhoRoupa.values();
+                        System.out.println("Escolha o tamanho da peça: \n P \n M \n G \n GG");
+                        read = new Scanner(System.in);
+                        escrito = read.nextLine().toUpperCase();
+                        for (TamanhoRoupa tamanho : tamanhos) {
+                            if (escrito.equals(tamanho.toString())) {
+                                roupa.setTamanho(tamanho);
+                            }
+                        }
                         break;
                     case 7: //Cor
+                        CoresRoupa[] cores = CoresRoupa.values();
+                        System.out.println("Escolha a cor da peça: \n Azul \n Vermelho " +
+                                "\n Amarelo \n Verde \n Roxo \n Preto \n Branco");
+                        read = new Scanner(System.in);
+                        escrito = read.nextLine().toUpperCase();
+                        for (CoresRoupa cor : cores) {
+                            if (escrito.equals(cor.toString())) {
+                                roupa.setCor(cor);
+                            }
+                        }
                         break;
                     case 8: //Valor da etiqueta
+                        System.out.println("Digite o valor de etiqueta: ");
+                        read = new Scanner(System.in);
+                        roupa.setValorEtiqueta(Double.parseDouble(read.nextLine()));
+                        System.out.println("Valor de etiqueta alterado para: R$" + roupa.getValorEtiqueta());
                         break;
                     case 9: //Valor pago
+                        System.out.println("Digite o valor pago: ");
+                        read = new Scanner(System.in);
+                        roupa.setValorPago(Double.parseDouble(read.nextLine()));
+                        System.out.println("Valor pago alterado para: R$" + roupa.getValorPago());
                         break;
                     case 10: //Preço sugerido
+                        System.out.println("Qual o preço sugerido?");
+                        read = new Scanner(System.in);
+                        roupa.setPrecoSugerido(Double.parseDouble(read.nextLine()));
+                        System.out.println("Preço sugerido alterado para: R$" + roupa.getPrecoSugerido());
                         break;
                     case 11: //Confirmar
                         if (inserido) {
