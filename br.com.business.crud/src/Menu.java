@@ -71,9 +71,7 @@ public class Menu {
                                         break;
                                 }
 
-                            }
-                            catch (Exception e)
-                            {
+                            } catch (Exception e) {
                                 System.out.println(e);
                             }
                         }
@@ -117,29 +115,27 @@ public class Menu {
                 System.out.println("Digite o Local de compra: ");
                 read = new Scanner(System.in);
                 escrito = read.nextLine().trim();
-                if(escrito.isEmpty()) {
+                if (escrito.isEmpty()) {
                     System.out.println("Esse campo não pode estar vazio! ");
                     valido = false;
-                }
-                else {
+                } else {
                     roupa.setLocalCompra(escrito);
-                    valido= true;
+                    valido = true;
                 }
-            }while (!valido);
+            } while (!valido);
             valido = false;
             do {
                 System.out.println("Digite o tipo de roupa: ");
                 read = new Scanner(System.in);
                 escrito = read.nextLine().trim();
-                if(escrito.isEmpty()) {
+                if (escrito.isEmpty()) {
                     System.out.println("Esse campo não pode estar vazio! ");
                     valido = false;
-                }
-                else {
+                } else {
                     roupa.setTipo(escrito);
                     valido = true;
                 }
-            } while(!valido);
+            } while (!valido);
             valido = false;
             do {
                 System.out.println("Digite a marca da roupa: ");
@@ -152,7 +148,7 @@ public class Menu {
                     roupa.setMarca(escrito);
                     valido = true;
                 }
-            }while (!valido);
+            } while (!valido);
             valido = false;
             do {
                 System.out.println("Faça a descrição da peça: ");
@@ -169,7 +165,7 @@ public class Menu {
             valido = false;
             TamanhoRoupa[] tamanhos = TamanhoRoupa.values();
             do {
-                System.out.println("Escolha o tamanho da peça: \n P \n M \n G \n GG");
+                System.out.println("Digite o tamanho da peça: \n P \n M \n G \n GG");
                 read = new Scanner(System.in);
                 escrito = read.nextLine().toUpperCase();
                 for (TamanhoRoupa tamanho : tamanhos) {
@@ -178,14 +174,15 @@ public class Menu {
                         valido = true;
                         break;
                     }
+                    System.out.println("Valor inválido! ");
                     valido = false;
                 }
-            }while (!valido);
+            } while (!valido);
             valido = false;
             CoresRoupa[] cores = CoresRoupa.values();
-            do{
-                System.out.println("Escolha a cor da peça: \n Azul \n Vermelho " +
-                                   "\n Amarelo \n Verde \n Roxo \n Preto \n Branco");
+            do {
+                System.out.println("Digite a cor da peça: \n Azul \n Vermelho " +
+                        "\n Amarelo \n Verde \n Roxo \n Preto \n Branco");
                 read = new Scanner(System.in);
                 escrito = read.nextLine().toUpperCase();
                 for (CoresRoupa cor : cores) {
@@ -194,71 +191,61 @@ public class Menu {
                         valido = true;
                         break;
                     }
+                    System.out.println("Valor inválido! ");
                     valido = false;
                 }
-            }while (!valido);
+            } while (!valido);
             valido = false;
             do {
-                try{
+                try {
                     System.out.println("Digite o valor de etiqueta: ");
                     read = new Scanner(System.in);
                     valorDigitado = Double.parseDouble(read.nextLine());
                     if (valorDigitado <= 0) {
                         System.out.println("Esse valor não pode ser Zero/Negativo! ");
                         valido = false;
-                    }
-                    else {
+                    } else {
                         roupa.setValorEtiqueta(valorDigitado);
                         valido = true;
                     }
-                }
-                catch (Exception e)
-                {
+                } catch (Exception e) {
                     System.out.println("Digite um valor");
                 }
-            }while(!valido);
+            } while (!valido);
             valido = false;
             do {
-                try
-                {
+                try {
                     System.out.println("Digite o valor pago: ");
                     read = new Scanner(System.in);
                     valorDigitado = Double.parseDouble(read.nextLine());
                     if (valorDigitado <= 0) {
                         System.out.println("Esse valor não pode ser Zero/Negativo! ");
                         valido = false;
-                    }
-                    else {
+                    } else {
                         roupa.setValorPago(valorDigitado);
                         valido = true;
                     }
-                }
-                catch (Exception e)
-                {
+                } catch (Exception e) {
                     System.out.println("Digite um valor");
                 }
-            }while(!valido);
+            } while (!valido);
             valido = false;
-            do{
-                try
-                {
+            do {
+                try {
                     System.out.println("Qual o preço sugerido?");
                     read = new Scanner(System.in);
                     valorDigitado = Double.parseDouble(read.nextLine());
                     if (valorDigitado <= 0) {
                         System.out.println("Esse valor não pode ser Zero/Negativo! ");
                         valido = false;
-                    }
-                    else {
+                    } else {
                         roupa.setPrecoSugerido(valorDigitado);
                         valido = true;
                     }
-                }
-                catch (Exception e)
-                {
+                } catch (Exception e) {
                     System.out.println("Digite um valor");
                 }
-            }while(!valido);
+            } while (!valido);
             exibirDadosRoupa(roupa);
             System.out.println("Confirmar os campos acima?");
             System.out.println("1 - Confirmar");
@@ -296,6 +283,7 @@ public class Menu {
         Data info = new Data();
         boolean ficar = true;
         String escrito;
+        double valorDigitado;
         do {
             try {
                 System.out.println("Selecione a linha que deseja alterar:");
@@ -321,77 +309,131 @@ public class Menu {
                         read = new Scanner(System.in);
                         String dataDMY = read.nextLine();
                         if (validarData(dataDMY)) {
-                            roupa.setDataEntrada(read.nextLine());
+                            roupa.setDataEntrada(dataDMY);
                             System.out.println("Data alterada para " + roupa.getDataEntrada());
-                        }
-                        else {
+                        } else {
                             System.out.println("Data Inválida!");
                         }
                         break;
                     case 2: //local da compra
                         System.out.println("Digite o Local de compra: ");
                         read = new Scanner(System.in);
-                        roupa.setLocalCompra(read.nextLine());
-                        System.out.println("Local de compra alterado para " + roupa.getLocalCompra());
+                        escrito = read.nextLine().trim();
+                        if (escrito.isEmpty()) {
+                            System.out.println("Esse campo não pode estar vazio! ");
+                        } else {
+                            roupa.setLocalCompra(escrito);
+                            System.out.println("Local de compra alterado para " + escrito);
+                        }
+
                         break;
                     case 3: //Tipo
                         System.out.println("Digite o tipo de roupa: ");
                         read = new Scanner(System.in);
-                        roupa.setTipo(read.nextLine());
-                        System.out.println("Tipo alterado para " + roupa.getTipo());
+                        escrito = read.nextLine().trim();
+                        if (escrito.isEmpty()) {
+                            System.out.println("Esse campo não pode estar vazio! ");
+                        } else {
+                            roupa.setTipo(escrito);
+                            System.out.println("Tipo alterado para " + escrito);
+                        }
                         break;
                     case 4: //Marca
-                        System.out.println("Digite a marca de roupa: ");
+                        System.out.println("Digite a marca da roupa: ");
                         read = new Scanner(System.in);
-                        roupa.setMarca(read.nextLine());
-                        System.out.println("Marca alterada para " + roupa.getMarca());
+                        escrito = read.nextLine().trim();
+                        if (escrito.isEmpty()) {
+                            System.out.println("Esse campo não pode estar vazio! ");
+                        } else {
+                            roupa.setMarca(escrito);
+                            System.out.println("Marca alterada para " + escrito);
+                        }
+
                         break;
                     case 5: //Característica
                         System.out.println("Faça a descrição da peça: ");
                         read = new Scanner(System.in);
-                        roupa.setDescricaoPeca(read.nextLine());
-                        System.out.println("Descrição alterada para " + roupa.getDescricaoPeca());
+                        escrito = read.nextLine().trim();
+                        if (escrito.isEmpty()) {
+                            System.out.println("Esse campo não pode estar vazio! ");
+                        } else {
+                            roupa.setDescricaoPeca(escrito);
+                            System.out.println("Descrição alterada para " + escrito);
+                        }
                         break;
                     case 6: //Tamanho
                         TamanhoRoupa[] tamanhos = TamanhoRoupa.values();
-                        System.out.println("Escolha o tamanho da peça: \n P \n M \n G \n GG");
+                        System.out.println("Digite o tamanho da peça: \n P \n M \n G \n GG");
                         read = new Scanner(System.in);
                         escrito = read.nextLine().toUpperCase();
                         for (TamanhoRoupa tamanho : tamanhos) {
                             if (escrito.equals(tamanho.toString())) {
                                 roupa.setTamanho(tamanho);
+                                System.out.println("Tamanho alterado para " + escrito);
+                                break;
                             }
+                            System.out.println("Valor inválido! ");
                         }
                         break;
                     case 7: //Cor
                         CoresRoupa[] cores = CoresRoupa.values();
-                        System.out.println("Escolha a cor da peça: \n Azul \n Vermelho " +
+                        System.out.println("Digite a cor da peça: \n Azul \n Vermelho " +
                                 "\n Amarelo \n Verde \n Roxo \n Preto \n Branco");
                         read = new Scanner(System.in);
                         escrito = read.nextLine().toUpperCase();
                         for (CoresRoupa cor : cores) {
                             if (escrito.equals(cor.toString())) {
                                 roupa.setCor(cor);
+                                System.out.println("Cor alterado para " + escrito);
+                                break;
                             }
+                            System.out.println("Valor inválido! ");
                         }
                         break;
                     case 8: //Valor da etiqueta
-                        System.out.println("Digite o valor de etiqueta: ");
-                        read = new Scanner(System.in);
-                        roupa.setValorEtiqueta(Double.parseDouble(read.nextLine()));
-                        System.out.println("Valor de etiqueta alterado para: R$" + roupa.getValorEtiqueta());
+                        try {
+                            System.out.println("Digite o valor de etiqueta: ");
+                            read = new Scanner(System.in);
+                            valorDigitado = Double.parseDouble(read.nextLine());
+                            if (valorDigitado <= 0) {
+                                System.out.println("Esse valor não pode ser Zero/Negativo! ");
+                            } else {
+                                roupa.setValorEtiqueta(valorDigitado);
+                                System.out.println("Valor de etiqueta alterado para: R$" + valorDigitado);
+                            }
+                        } catch (Exception e) {
+                            System.out.println("Digite um valor");
+                        }
                         break;
                     case 9: //Valor pago
-                        System.out.println("Digite o valor pago: ");
-                        read = new Scanner(System.in);
-                        roupa.setValorPago(Double.parseDouble(read.nextLine()));
-                        System.out.println("Valor pago alterado para: R$" + roupa.getValorPago());
+                        try {
+                            System.out.println("Digite o valor pago: ");
+                            read = new Scanner(System.in);
+                            valorDigitado = Double.parseDouble(read.nextLine());
+                            if (valorDigitado <= 0) {
+                                System.out.println("Esse valor não pode ser Zero/Negativo! ");
+                            } else {
+                                roupa.setValorPago(valorDigitado);
+                                System.out.println("Valor de etiqueta alterado para: R$" + valorDigitado);
+                            }
+                        } catch (Exception e) {
+                            System.out.println("Digite um valor");
+                        }
                         break;
                     case 10: //Preço sugerido
-                        System.out.println("Qual o preço sugerido?");
-                        read = new Scanner(System.in);
-                        roupa.setPrecoSugerido(Double.parseDouble(read.nextLine()));
-                        System.out.println("Preço sugerido alterado para: R$" + roupa.getPrecoSugerido());
+                        try {
+                            System.out.println("Qual o preço sugerido?");
+                            read = new Scanner(System.in);
+                            valorDigitado = Double.parseDouble(read.nextLine());
+                            if (valorDigitado <= 0) {
+                                System.out.println("Esse valor não pode ser Zero/Negativo! ");
+                            } else {
+                                roupa.setPrecoSugerido(valorDigitado);
+                                System.out.println("Preço sugerido alterado para: R$" + valorDigitado);
+                            }
+                        } catch (Exception e) {
+                            System.out.println("Digite um valor");
+                        }
                         break;
                     case 11: //Confirmar
                         if (inserido) {
@@ -425,16 +467,14 @@ public class Menu {
         Data info = new Data();
         try {
             String[] linhas = info.GetAll();
-            if (linhas.length-1 <= 0)
-            {
+            if (linhas.length - 1 <= 0) {
                 System.out.println("********** Database vazia, adiciona elementos antes! **********");
                 return;
             }
             System.out.println("Código - Data de entrada - Local da compra - Tipo - Marca - Características - idTamanho - idCor - Valor da etiqueta - Valor pago - Valor margem de 100% - Preço sugerido");
             for (String linha : linhas) {
                 String[] aux = linha.split(";");
-                if (aux[0].equals("."))
-                {
+                if (aux[0].equals(".")) {
                     break;
                 }
                 System.out.println(aux[0] + " - " +
@@ -469,7 +509,7 @@ public class Menu {
         System.out.println("Preço sugerido: R$" + roupa.getPrecoSugerido());
     }
 
-    public static void exibirDadosRoupa(int id) throws Exception{
+    public static void exibirDadosRoupa(int id) throws Exception {
         Data info = new Data();
         RoupaVO roupa = info.MontaRoupa(id);
         exibirDadosRoupa(roupa);
